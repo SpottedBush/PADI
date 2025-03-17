@@ -60,8 +60,8 @@ function apply_PADI(x0::PolarimetricMap, A::D, d::Array{data_table,1}, par::Arra
         vfill!(view(upper_born,:,:,1:4),Inf)
     end
     g=vcreate(X0);
-    rhapsodie_fg!(x,g) = apply_gradient!(PolarimetricMap(parameter_type, x), A, g, d, μ, α, regul_type)
-    x = vmlmb(rhapsodie_fg!, X0, mem=mem, maxeval=maxeval, maxiter=maxiter, lower=lower_born, upper=upper_born, xtol=xtol,  gtol=gtol, ftol=ftol, verb=verbose);
+    PADI_fg!(x,g) = apply_gradient!(PolarimetricMap(parameter_type, x), A, g, d, μ, α, regul_type)
+    x = vmlmb(PADI_fg!, X0, mem=mem, maxeval=maxeval, maxiter=maxiter, lower=lower_born, upper=upper_born, xtol=xtol,  gtol=gtol, ftol=ftol, verb=verbose);
     return PolarimetricMap(x0.parameter_type, x)
 end
 
