@@ -92,7 +92,7 @@ Simulate data based on the given parameters.
 
 # Arguments
 - `Good_Pix`: The array indicating good pixels.
-- `tau`: The optical depth parameter.
+- `tau`: The polarisation ratio of the disk. (tau = ip/(iu+ip)
 - `A::Mapping`: The mapping to apply.
 - `ro_noise`: The noise level (default is 8.5).
 
@@ -194,11 +194,11 @@ end
 """
 	generate_parameters(map_size, tau)
 
-Generate the parameters for the polarimetric map based on the given map size and optical depth parameter.
+Generate the parameters for the polarimetric map based on the given map size and polarisation ratio of the disk.
 
 # Arguments
 - `map_size`: The size of the map.
-- `tau`: The optical depth parameter.
+- `tau`: The polarisation ratio of the disk. (tau = ip/(iu+ip)
 
 # Returns
 - `PolarimetricMap`: The generated polarimetric map with intensities.
