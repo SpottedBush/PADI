@@ -12,8 +12,8 @@
 module PADI
 
     export
-        TPolarimetricPixel,
-        TPolarimetricMap,
+        PolarimetricPixel,
+        PolarimetricMap,
         write_polar_map,
         read_and_fill_polar_map,
         convert,
@@ -27,7 +27,7 @@ module PADI
         pad,
         set_fft_op,
         TwoDimensionalTransformInterpolator,
-        TFieldTransformOperator,
+        FieldTransformOperator,
         data_simulator,
         generate_model,
         data_generator,
@@ -66,7 +66,6 @@ module PADI
     include("polarimetric_parameters.jl")
     include("grad_tools.jl")
     include("loaders.jl")
-    include("separable_methods.jl")
     include("sure_tools.jl")
     include("padi_methods.jl")
     include("datasimul_tools.jl")

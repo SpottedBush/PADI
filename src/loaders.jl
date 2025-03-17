@@ -2,7 +2,7 @@ const Trans_Table = Vector{NTuple{2, AffineTransform2D}}(); # Contains all affin
 const Star_Disk_Table = Vector{NTuple{4, AffineTransform2D}}(); # Contains all affine transforms used 
 const Parameters = parameters_table[];
 get_par()::parameters_table = Parameters[1];
-const dataset = Tdata_table[];
+const dataset = data_table[];
 
 
 const EPSILON_save = Array{Float64, 1}(undef, 1);
@@ -153,9 +153,9 @@ function load_data(name_data, name_weight)
         T_l_disk = TwoDimensionalTransformInterpolator(output_size, input_size, ker, ker, Star_Disk_Table[k][2])
         T_r_star = TwoDimensionalTransformInterpolator(output_size, input_size, ker, ker, Star_Disk_Table[k][3])
         T_r_disk = TwoDimensionalTransformInterpolator(output_size, input_size, ker, ker, Star_Disk_Table[k][4])
-        push!(dataset, Tdata_table((data[:,:,k]')[:,:], 
+        push!(dataset, data_table((data[:,:,k]')[:,:], 
                     (weight[:,:,k]')[:,:],
-                    TFieldTransformOperator(get_par().cols,
+                    FieldTransformOperator(get_par().cols,
                                             get_par().rows,
                                             get_par().v[k][1],
                                             get_par().v[k][2],

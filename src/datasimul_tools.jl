@@ -57,7 +57,7 @@ Generate a model based on the given polarimetric map and mapping.
 # Returns
 - `M`: The generated model array.
 """
-function generate_model(S::TPolarimetricMap, A::Mapping)
+function generate_model(S::PolarimetricMap, A::Mapping)
     @assert size(S) == get_par().cols[1:2];
     
     M=Array{Float64,3}(undef, get_par().rows[1], 
@@ -71,7 +71,7 @@ function generate_model(S::TPolarimetricMap, A::Mapping)
     	T_disk_left = TwoDimensionalTransformInterpolator(output_size, input_size, ker, ker, Star_Disk_Table[k][2])
     	T_star_right = TwoDimensionalTransformInterpolator(output_size, input_size, ker, ker, Star_Disk_Table[k][3])
     	T_disk_right = TwoDimensionalTransformInterpolator(output_size, input_size, ker, ker, Star_Disk_Table[k][4])
-	    F = TFieldTransformOperator(get_par().cols, 
+	    F = FieldTransformOperator(get_par().cols, 
 	                                        get_par().rows, 
 	                                        get_par().v[k][1],
 	                                        get_par().v[k][2],
@@ -115,19 +115,19 @@ function tdata_simulator(Good_Pix, tau, A::Mapping; ro_noise=8.5)
 	
 	check_MSE(M, D, W);
 	
-    CS = TPolarimetricMap("stokes", S.I_star, A*S.I_disk, A*S.Q, A*S.U)
+    CS = PolarimetricMap("stokes", S.I_star, A*S.I_disk, A*S.Q, A*S.U)
 	return D, W, S, CS
 end
 
 """
-	ddit_data_simulator(Good_Pix, A::Mapping, S::TPolarimetricMap; ro_noise=8.5)
+	ddit_data_simulator(Good_Pix, A::Mapping, S::PolarimetricMap; ro_noise=8.5)
 
 Simulates data for a given polarimetric map.
 
 # Arguments
 - `Good_Pix`: A matrix indicating good pixels.
 - `A::Mapping`: A mapping object.
-- `S::TPolarimetricMap`: A polarimetric map object.
+- `S::PolarimetricMap`: A polarimetric map object.
 - `ro_noise`: (Optional) The noise level, default is 8.5.
 
 # Returns
@@ -146,7 +146,7 @@ Simulates data for a given polarimetric map.
 - The function checks the mean squared error (MSE) of the model `M`, data `D`, and weight matrix `W`.
 - The function returns the generated data `D`, weight matrix `W`, padded polarimetric map `S`, and corrected polarimetric map `CS`.
 """
-function ddit_data_simulator(Good_Pix, A::Mapping, S::TPolarimetricMap; ro_noise=8.5)
+function ddit_data_simulator(Good_Pix, A::Mapping, S::PolarimetricMap; ro_noise=8.5)
     if size(S) != get_par().cols[1:2]
         @warn "Size of the Polarimetric Map is wrong, it will be padded."
         S = pad(S);
@@ -167,8 +167,8 @@ function ddit_data_simulator(Good_Pix, A::Mapping, S::TPolarimetricMap; ro_noise
 	W = Good_Pix ./ VAR
 	D = data_generator(M, W)
 	check_MSE(M, D, W);
-    S = TPolarimetricMap("stokes", S.I_star, S.I_disk, S.Q, S.U)
-	CS = TPolarimetricMap("stokes", S.I_star, A*S.I_disk, A*S.Q, A*S.U)
+    S = PolarimetricMap("stokes", S.I_star, S.I_disk, S.Q, S.U)
+	CS = PolarimetricMap("stokes", S.I_star, A*S.I_disk, A*S.Q, A*S.U)
 	return D, W, S, CS
 end
 
@@ -244,5 +244,5 @@ function generate_parameters(map_size, tau)
 	STAR[round(Int64,10*map_size[1]/16)-3,round(Int64,10*map_size[2]/16)] = 20000.0;
 	STAR[round(Int64,10*map_size[1]/16),round(Int64,10*map_size[2]/16)-3] = 100000.0;
 
-    return TPolarimetricMap("intensities", STAR, Iu, Ip, θ);
+    return PolarimetricMap("intensities", STAR, Iu, Ip, θ);
 end

@@ -70,9 +70,9 @@ function crop!(X::M)  where {T<:AbstractFloat, M<:AbstractArray{T,3}}
     end     
 end
 
-function crop(X::TPolarimetricMap{T}) where {T<:AbstractFloat}
+function crop(X::PolarimetricMap{T}) where {T<:AbstractFloat}
     #@assert size(X) .==   get_par().cols
-    return TPolarimetricMap(X.parameter_type,
+    return PolarimetricMap(X.parameter_type,
                            crop!(view(X.I,:,:)),
                            crop!(view(X.I_star,:,:)),
                            crop!(view(X.I_disk,:,:)),
@@ -85,7 +85,7 @@ function crop(X::TPolarimetricMap{T}) where {T<:AbstractFloat}
                            crop!(view(X.θ,:,:)))   
 end        
 
-function crop!(X::TPolarimetricMap{T})  where {T<:AbstractFloat}
+function crop!(X::PolarimetricMap{T})  where {T<:AbstractFloat}
         crop!(view(X.I,:,:));
         crop!(view(X.I_star,:,:));
         crop!(view(X.I_disk,:,:));
@@ -108,9 +108,9 @@ function pad(X::M)  where {T<:AbstractFloat, M<:AbstractArray{T,2}}
     return PAD*X;
 end         
         
-function pad(X::TPolarimetricMap{T}) where {T<:AbstractFloat}  
+function pad(X::PolarimetricMap{T}) where {T<:AbstractFloat}  
     #@assert size(X) .==   get_par().cols
-    return TPolarimetricMap(X.parameter_type,
+    return PolarimetricMap(X.parameter_type,
                            pad(view(X.I,:,:)),
                            pad(view(X.I_star,:,:)),
                            pad(view(X.I_disk,:,:)),

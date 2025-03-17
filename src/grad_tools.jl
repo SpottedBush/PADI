@@ -35,13 +35,7 @@ struct parameters_table{T<: AbstractFloat}
     derotang::Vector{T}
 end
 
-struct Tdata_table{T<:AbstractFloat, A<:TFieldTransformOperator{T}} # Other types
-    data::Array{T, 2};
-    weights::Array{T, 2};
-    H::A
-end
-
-struct TFieldTransformOperator{T<:AbstractFloat, L<:Mapping, R<:Mapping} <: LinearMapping
+struct FieldTransformOperator{T<:AbstractFloat, L<:Mapping, R<:Mapping} <: LinearMapping
     cols::NTuple{3, Int}
     rows::NTuple{2, Int}
     v_l::NTuple{3, T}
@@ -50,6 +44,12 @@ struct TFieldTransformOperator{T<:AbstractFloat, L<:Mapping, R<:Mapping} <: Line
     H_l_disk::L
     H_r_star::R
     H_r_disk::R
+end
+
+struct data_table{T<:AbstractFloat, A<:FieldTransformOperator{T}} # Other types
+    data::Array{T, 2};
+    weights::Array{T, 2};
+    H::A
 end
 
 function Set_Vi(Indices::AbstractArray{Int64,2}; alpha=[0, pi/4, pi/8, 3*pi/8], psi=[0,pi/2])
@@ -157,7 +157,7 @@ function set_fft_op(PSF::AbstractArray{T,2}, PSFCenter::AbstractArray{T,1}) wher
 	return FFT
 end
 
-function vcreate(::Type{LazyAlgebra.Direct}, A::TFieldTransformOperator{T},
+function vcreate(::Type{LazyAlgebra.Direct}, A::FieldTransformOperator{T},
                  x::AbstractArray{T, 3}, scratch::Bool = false) where {T <: AbstractFloat}
     @assert !Base.has_offset_axes(x)
     @assert size(x) == A.cols
@@ -165,7 +165,7 @@ function vcreate(::Type{LazyAlgebra.Direct}, A::TFieldTransformOperator{T},
     Array{T, 2}(undef, A.rows)
 end
 
-function vcreate(::Type{LazyAlgebra.Adjoint}, A::TFieldTransformOperator{T},
+function vcreate(::Type{LazyAlgebra.Adjoint}, A::FieldTransformOperator{T},
                 x::AbstractArray{T, 2}, scratch::Bool = false) where {T <: AbstractFloat}
     @assert !Base.has_offset_axes(x)
     @assert size(x) == A.rows
@@ -175,7 +175,7 @@ end
 
 function apply!(α::Real,
                 ::Type{LazyAlgebra.Direct},
-                R::TFieldTransformOperator{T},
+                R::FieldTransformOperator{T},
                 src::AbstractArray{T,3},
                 scratch::Bool,
                 β::Real,
@@ -196,7 +196,7 @@ end
 
 function apply!(α::Real,
                 ::Type{LazyAlgebra.Adjoint},
-                R::TFieldTransformOperator{T},
+                R::FieldTransformOperator{T},
                 src::AbstractArray{T,2},
                 scratch::Bool,
                 β::Real,
@@ -230,7 +230,7 @@ function fg!(x::AbstractArray{T,3}, g::AbstractArray{T,3}) where {T<:AbstractFlo
     return f
 end       
 
-function fg!(x::AbstractArray{T, 3}, g::AbstractArray{T,3}, d::Tdata_table{T}) where {T<:AbstractFloat}
+function fg!(x::AbstractArray{T, 3}, g::AbstractArray{T,3}, d::data_table{T}) where {T<:AbstractFloat}
     r = d.H*x - d.data;
     wr = d.weights .* r;
     g .+= d.H'*wr;

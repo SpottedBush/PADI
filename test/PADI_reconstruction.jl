@@ -39,7 +39,7 @@ for k in contrast_list
     println("------Contrast parameter: ", k, "------")
     true_polar_map = PADI.read_and_fill_polar_map(parameter_type, "test_results/contrast_10e$(k)/TRUE.fits")
     diff_fits = EasyFITS.readfits("test_results/contrast_10e$(k)/Results_Separable_DoubleDifference.fits")
-    diff_polar_map = PADI.TPolarimetricMap(parameter_type, diff_fits[ :, :, 1]', diff_fits[ :, :, 5]', diff_fits[:, :, 2]', diff_fits[:, :, 3]')
+    diff_polar_map = PADI.PolarimetricMap(parameter_type, diff_fits[ :, :, 1]', diff_fits[ :, :, 5]', diff_fits[:, :, 2]', diff_fits[:, :, 3]')
 
     PADI.load_data("test_results/contrast_10e$(k)/DATA.fits", "test_results/contrast_10e$(k)/WEIGHT.fits")
 

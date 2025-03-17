@@ -40,7 +40,7 @@ where :
 
 """
 
-function apply_PADI(x0::TPolarimetricMap, A::D, d::Array{Tdata_table,1}, par::Array{T,1}; mem=3, maxeval=50, maxiter=50, α::Real=1, xtol=(1e-3,1e-8), gtol=(1e-3,1e-8), ftol=(1e-3,1e-8), regul_type::String="struct", verbose::Bool=false) where {T <: AbstractFloat, D <:Mapping}
+function apply_PADI(x0::PolarimetricMap, A::D, d::Array{data_table,1}, par::Array{T,1}; mem=3, maxeval=50, maxiter=50, α::Real=1, xtol=(1e-3,1e-8), gtol=(1e-3,1e-8), ftol=(1e-3,1e-8), regul_type::String="struct", verbose::Bool=false) where {T <: AbstractFloat, D <:Mapping}
     n1,n2 = size(x0)
     parameter_type = x0.parameter_type
     X0 = convert(Array{T,3}, x0);
@@ -60,21 +60,21 @@ function apply_PADI(x0::TPolarimetricMap, A::D, d::Array{Tdata_table,1}, par::Ar
         vfill!(view(upper_born,:,:,1:4),Inf)
     end
     g=vcreate(X0);
-    rhapsodie_fg!(x,g) = apply_gradient!(TPolarimetricMap(parameter_type, x), A, g, d, μ, α, regul_type)
+    rhapsodie_fg!(x,g) = apply_gradient!(PolarimetricMap(parameter_type, x), A, g, d, μ, α, regul_type)
     x = vmlmb(rhapsodie_fg!, X0, mem=mem, maxeval=maxeval, maxiter=maxiter, lower=lower_born, upper=upper_born, xtol=xtol,  gtol=gtol, ftol=ftol, verb=verbose);
-    return TPolarimetricMap(x0.parameter_type, x)
+    return PolarimetricMap(x0.parameter_type, x)
 end
 
 """
-    apply_gradient!(X::TPolarimetricMap, A::D, g::Array{T,3}, d::Array{Tdata_table,1}, μ::Array{hyperparameters{T},1}, α::Real, regul_type::String) where {T <: AbstractFloat, D <:Mapping}
+    apply_gradient!(X::PolarimetricMap, A::D, g::Array{T,3}, d::Array{data_table,1}, μ::Array{hyperparameters{T},1}, α::Real, regul_type::String) where {T <: AbstractFloat, D <:Mapping}
 
 Applies the gradient to the polarimetric map `X` using the mapping `A`, gradient array `g`, data array `d`, hyperparameters `μ`, regularization parameter `α`, and regularization type `regul_type`.
 
 # Arguments
-- `X::TPolarimetricMap`: The polarimetric map.
+- `X::PolarimetricMap`: The polarimetric map.
 - `A::D`: The mapping.
 - `g::Array{T,3}`: The gradient array.
-- `d::Array{Tdata_table,1}`: The data array.
+- `d::Array{data_table,1}`: The data array.
 - `μ::Array{hyperparameters{T},1}`: The hyperparameters.
 - `α::Real`: The regularization parameter.
 - `regul_type::String`: The type of regularization ("struct", "joint", or "disjoint").
@@ -82,7 +82,7 @@ Applies the gradient to the polarimetric map `X` using the mapping `A`, gradient
 # Returns
 - `f::Float64`: The computed cost function value.
 """
-function apply_gradient!(X::TPolarimetricMap, A::D, g::Array{T,3}, d::Array{Tdata_table,1}, μ::Array{hyperparameters{T},1}, α::Real, regul_type::String) where {T <: AbstractFloat, D <:Mapping}
+function apply_gradient!(X::PolarimetricMap, A::D, g::Array{T,3}, d::Array{data_table,1}, μ::Array{hyperparameters{T},1}, α::Real, regul_type::String) where {T <: AbstractFloat, D <:Mapping}
 
     n1, n2, n3 = size(g)
     @assert (n1,n2) == size(X)

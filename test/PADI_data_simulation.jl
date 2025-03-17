@@ -60,7 +60,7 @@ for k in contrast_list
 
     Iu_star = Matrix(Iu_star)
 
-    X0 = PADI.TPolarimetricMap("intensities", Iu_star, Iu_disk, Ip_disk, scattering)
+    X0 = PADI.PolarimetricMap("intensities", Iu_star, Iu_disk, Ip_disk, scattering)
 
     GoodPixMap = rand(0.0:1e-16:1.0,(DSIZE, 2*DSIZE)).< 0.99;
 

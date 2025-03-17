@@ -48,8 +48,8 @@ function MSE_data(x_est::Array{T,N}, x_true::Array{T,N}, d::data_table) where {T
     return MSE,n
 end
 
-function MSE_object(x_est::TPolarimetricMap, x_true::TPolarimetricMap)
-    MSE = zeros(length(fieldnames(TPolarimetricMap)) - 1)
+function MSE_object(x_est::PolarimetricMap, x_true::PolarimetricMap)
+    MSE = zeros(length(fieldnames(PolarimetricMap)) - 1)
     centers=size(x_est)[1:2]./2
     mask=x_true.I_star .> 0
     for ind in CartesianIndices(mask)
@@ -58,7 +58,7 @@ function MSE_object(x_est::TPolarimetricMap, x_true::TPolarimetricMap)
         end           
     end
     # n_pixels = sum(get_MASK())
-    for (i, attr) in enumerate(fieldnames(TPolarimetricMap))
+    for (i, attr) in enumerate(fieldnames(PolarimetricMap))
         if i == 1 # Skipping field "parameter_type"
             continue
         end
@@ -73,8 +73,8 @@ function MSE_object(x_est::TPolarimetricMap, x_true::TPolarimetricMap)
 end
 
 
-function absolute_error(x_est::TPolarimetricMap, x_true::TPolarimetricMap)
-    abs_error = zeros(length(fieldnames(TPolarimetricMap)) - 1)
+function absolute_error(x_est::PolarimetricMap, x_true::PolarimetricMap)
+    abs_error = zeros(length(fieldnames(PolarimetricMap)) - 1)
     centers=size(x_est)[1:2]./2
     mask=x_true.I_star .> 0
     for ind in CartesianIndices(mask)
@@ -82,7 +82,7 @@ function absolute_error(x_est::TPolarimetricMap, x_true::TPolarimetricMap)
             mask[ind]=0.
         end           
     end
-    for (i, attr) in enumerate(fieldnames(TPolarimetricMap))
+    for (i, attr) in enumerate(fieldnames(PolarimetricMap))
         if i == 1 # Skipping field "parameter_type"
             continue
         end
@@ -98,9 +98,9 @@ function absolute_error(x_est::TPolarimetricMap, x_true::TPolarimetricMap)
     return abs_error
 end
 
-function SSIM(x_est::TPolarimetricMap, x_true::TPolarimetricMap)
-    ssim_values = zeros(length(fieldnames(TPolarimetricMap)) - 1)
-    for (i, attr) in enumerate(fieldnames(TPolarimetricMap))
+function SSIM(x_est::PolarimetricMap, x_true::PolarimetricMap)
+    ssim_values = zeros(length(fieldnames(PolarimetricMap)) - 1)
+    for (i, attr) in enumerate(fieldnames(PolarimetricMap))
         if i == 1 # Skipping field "parameter_type"
             continue
         end
