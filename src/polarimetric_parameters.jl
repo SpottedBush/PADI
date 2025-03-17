@@ -70,7 +70,7 @@ create an object of type PolarimetricParameter from either:
 Each parameter can be called from the structure. For exemple with a 
 construction from Stokes parameters S=(I_star, I_disk, Q, U):
 
-    using Rhapsodie
+    using PADI
     X = PolarimetricParameter(S, 'stokes');
     X.I_disk #yields the Stokes parameter I_disk
     X.Ip_disk #yields the polarized intensity Ip_disk

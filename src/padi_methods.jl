@@ -30,7 +30,7 @@ struct hyperparameters{T<: AbstractFloat}
 end
 
 """
-    apply_rhapsodie('x0', 'A' , 'data', 'hyperparameters'; 'kwd')
+    apply_PADI('x0', 'A' , 'data', 'hyperparameters'; 'kwd')
 
 where : 
     - x0 is an initial reconstruction
