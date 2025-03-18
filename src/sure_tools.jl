@@ -18,13 +18,13 @@
 # on Image Process., 17(9) :1540–1554.
 #
 #
-#------------------------------------------------------
+#----------------------------------------------------------
 #
-# This file is part of Rhapsodie
+# This file is part of PADI
 #
-# Copyright (c) 2017-2021 Laurence DENNEULIN (see Licence.md)
 #
-
+# Copyright (c) 2024-2025 Vincent Tardieux and Laurence Denneulin (see LICENCE.md)
+#
 #------------------------------------------------
 
 

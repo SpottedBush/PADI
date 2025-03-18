@@ -1,16 +1,15 @@
 #
-# tgrad_tools.jl
+# grad_tools.jl
 #
 # Provide tools for the calculus of the PADI data fidelity term. 
 #
-# ------------------------------------------------
+#----------------------------------------------------------
 #
 # This file is part of PADI
 #
 #
-# Copyright (c) 2024-2025 Vincent TARDIEUX and Laurence DENNEULIN (see LICENCE.md)
+# Copyright (c) 2024-2025 Vincent Tardieux and Laurence Denneulin (see LICENCE.md)
 #
-
 #------------------------------------------------
 
 const ImageInterpolator{T<:AbstractFloat, K<:Kernel{T}} = TwoDimensionalTransformInterpolator{T,K,K}

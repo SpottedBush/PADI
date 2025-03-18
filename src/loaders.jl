@@ -1,3 +1,16 @@
+# 
+# loaders.jl
+# 
+# Loading everything needed for the reconstruction. (TransTables etc...)
+#----------------------------------------------------------
+#
+# This file is part of PADI
+#
+#
+# Copyright (c) 2024-2025 Vincent Tardieux and Laurence Denneulin (see LICENCE.md)
+#
+#------------------------------------------------
+
 const Trans_Table = Vector{NTuple{2, AffineTransform2D}}(); # Contains all affine transforms used 
 const Star_Disk_Table = Vector{NTuple{4, AffineTransform2D}}(); # Contains all affine transforms used 
 const Parameters = parameters_table[];

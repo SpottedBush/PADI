@@ -1,6 +1,18 @@
+#
+# polarimetric_parameters.jl
+#
+# Contains the pixel and map structs. 
+#
+#----------------------------------------------------------
+#
+# This file is part of PADI
+#
+#
+# Copyright (c) 2024-2025 Vincent Tardieux and Laurence Denneulin (see LICENCE.md)
+#
+#------------------------------------------------
+
 using EasyFITS
-
-
 #------------------------------------------------
 # PADI Struct definition
 # For pixels

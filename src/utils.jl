@@ -1,3 +1,12 @@
+#----------------------------------------------------------
+#
+# This file is part of PADI
+#
+#
+# Copyright (c) 2024-2025 Vincent Tardieux and Laurence Denneulin (see LICENCE.md)
+#
+#------------------------------------------------
+
 function SetCropOperator(table::Vector{NTuple{N, AffineTransform2D}}) where {N}
     DSIZE=get_par().rows[1]
     MASK=ones(get_par().cols[1:2]);

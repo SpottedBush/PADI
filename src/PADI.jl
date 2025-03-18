@@ -5,9 +5,12 @@
 #
 #----------------------------------------------------------
 #
-# 
-# Copiyright (c) 2017-2021 Laurence Denneulin (see LICENCE.md)
+# This file is part of PADI
 #
+#
+# Copyright (c) 2024-2025 Vincent Tardieux and Laurence Denneulin (see LICENCE.md)
+#
+#------------------------------------------------
 
 module PADI
 

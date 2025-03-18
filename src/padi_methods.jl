@@ -1,7 +1,5 @@
 #
-# grad_tools.jl
-#
-# Provide the RHAPSODIE methods to reconstruct the polarimetric 
+# Provide the PADI methods to reconstruct the polarimetric 
 # parameters from a dataset using:
 #
 # - VMLM-B (when "mixed" polarimetric parameters are used)
@@ -12,18 +10,19 @@
 # - Forward-Backward with backtracking (when "stokes" parameters are used)
 # [Beck and Teboulle, 2009] Beck, A. and Teboulle, M. (2009). 
 # A Fast Iterative Shrinkage-Thresholding Algorithm for Linear Inverse Problems. 
-# SIAM J. Imaging Sci., 2(1) :183–202. (TODO: clean implementation)
+# SIAM J. Imaging Sci., 2(1) :183–202.
 #
 #
 # ------------------------------------------------
 #
-# This file is part of Rhapsodie
+# This file is part of PADI
 #
 #
-# Copyright (c) 2017-2021 Laurence Denneulin (see LICENCE.md)
+# Copyright (c) 2024-2025 Vincent Tardieux and Laurence Denneulin (see LICENCE.md)
 #
 
 #------------------------------------------------
+
 struct hyperparameters{T<: AbstractFloat}
     λ::T # Weight of the regularization
     ρ::T # Ratio between the weight and the threshold μ = λ/(2*ρ);

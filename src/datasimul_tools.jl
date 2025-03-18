@@ -3,14 +3,13 @@
 #
 # Provide tools to simulate synthetic parameters and dataset.
 #
-# ------------------------------------------------
+#----------------------------------------------------------
 #
-# This file is part of Rhapsodie
+# This file is part of PADI
 #
 #
-# Copyright (c) 2017-2021 Laurence Denneulin (see LICENCE.md)
-
-
+# Copyright (c) 2024-2025 Vincent Tardieux and Laurence Denneulin (see LICENCE.md)
+#
 #------------------------------------------------
 
 """
