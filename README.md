@@ -5,22 +5,21 @@
 ## Installation
 
 In the package manager:
-#TOCHANGE
+- Using HTTPS
 ```julia
-pkg> add https://github.com/LaurenceDenneulin/Rhapsodie.jl
+pkg> add https://github.com/SpottedBush/PADI.jl
 ```
-if you use HTTPS or:
 
+- Using SSH:
 ```julia
-pkg> add git@github.com:LaurenceDenneulin/Rhapsodie.jl
+pkg> add git@github.com:SpottedBush/PADI.git
 ```
-if you use SSH.
 
 ## Usage
 
-First, you need to activate Rhapsodie environment using:
+First, you need to activate PADI environment using:
 ```julia
-pkg> activate .julia/packages/Rhapsodie/XXXXX
+pkg> activate .julia/packages/PADI/XXXXX
 pkg> precompile
 ```
 where XXXXX is the folder version.
@@ -30,12 +29,11 @@ You can check the dependencies with:
 ```julia
 pkg>status
 ```
-Rhapsodie can be applied using:
+PADI can be applied using:
 
 ```julia
-x=apply_rhapsodie(x0, A, d, μ)
+x=apply_PADI(x0, A, d, μ)
 ```
-
 where:
 
 -`x0` is the initialization,
@@ -45,3 +43,6 @@ where:
 -`d` the dataset uncluding data and weights,
 
 -`μ` a vector of regularization hyperparameters.
+
+
+Further usage can be found in the test folder where reconstruction scripts examples are given.
