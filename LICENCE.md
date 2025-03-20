@@ -1,6 +1,6 @@
 The PADI package is licensed under the MIT "Expat" License:
 
-> Copyright (c) 2021: Laurence Denneulin <https://github.com/LaurenceDenneulin>
+> Copyright (c) 2024-2025: Vincent Tardieux <https://github.com/SpottedBush> and Laurence Denneulin <https://github.com/LaurenceDenneulin>
 >
 > Permission is hereby granted, free of charge, to any person obtaining
 > a copy of this software and associated documentation files (the
