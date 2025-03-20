@@ -46,3 +46,4 @@ where:
 
 
 Further usage can be found in the test folder where reconstruction scripts examples are given.
+Each required data for the scripts contained in the test folder can be accessed here : https://drive.google.com/drive/folders/1RcNd5Qh6XD2Trd07VGPWqlphMU699PFi?usp=drive_link
