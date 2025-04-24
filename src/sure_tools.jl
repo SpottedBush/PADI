@@ -48,31 +48,6 @@ function MSE_data(x_est::Array{T,N}, x_true::Array{T,N}, d::data_table) where {T
     return MSE,n
 end
 
-function MSE_object(x_est::PolarimetricMap, x_true::PolarimetricMap)
-    MSE = zeros(length(fieldnames(PolarimetricMap)) - 1)
-    centers=size(x_est)[1:2]./2
-    mask=x_true.I_star .> 0
-    for ind in CartesianIndices(mask)
-        if (ind[1] - centers[1])^2 + (ind[2] - centers[2])^2 < 5^2
-            mask[ind]=0.
-        end           
-    end
-    # n_pixels = sum(get_MASK())
-    for (i, attr) in enumerate(fieldnames(PolarimetricMap))
-        if i == 1 # Skipping field "parameter_type"
-            continue
-        end
-        if i == 11 # Calculating circular MSE for theta field
-            # MSE[i - 1] = rad2deg(vnorm2(angle.(exp.(im*2*(x_est.θ - x_true.θ))).*get_MASK()/2)/n_pixels)
-            continue
-        end
-        MSE[i - 1] = vdot((getfield(x_est, attr) - getfield(x_true, attr)).*mask, (getfield(x_est, attr) - getfield(x_true, attr)).*mask)
-        # MSE[i - 1] /= vdot(getfield(x_true, attr), getfield(x_true, attr))
-    end
-    return MSE
-end
-
-
 function absolute_error(x_est::PolarimetricMap, x_true::PolarimetricMap)
     abs_error = zeros(length(fieldnames(PolarimetricMap)) - 1)
     centers=size(x_est)[1:2]./2
@@ -107,24 +82,6 @@ function SSIM(x_est::PolarimetricMap, x_true::PolarimetricMap)
         ssim_values[i - 1] = assess_ssim(getfield(x_est, attr), getfield(x_true, attr))
     end
     return ssim_values
-end
-
-
-function MSE_object(x_est::PolarimetricMap, x_true::PolarimetricMap)
-    MSE = zeros(length(fieldnames(PolarimetricMap)) - 1)
-    n_pixels = 1
-    for (i, attr) in enumerate(fieldnames(PolarimetricMap))
-        if i == 1 # Skipping field "parameter_type"
-            continue
-        end
-        if i == 7 # Calculating circular MSE for theta field
-            MSE[i - 1] = rad2deg(vnorm2(angle.(exp.(im*2*(x_est.θ - x_true.θ))).*1/2)/n_pixels)
-            continue
-        end
-        MSE[i - 1] = vdot(getfield(x_est, attr) - getfield(x_true, attr), getfield(x_est, attr) - getfield(x_true, attr))
-        MSE[i - 1] /= vdot(getfield(x_true, attr), getfield(x_true, attr))
-    end
-    return MSE
 end
 
 function sure_crit(x::Array{T,N},

@@ -18,7 +18,6 @@ for file in files
         
         x_est = read_and_fill_polar_map(parameter_type, prima_path * file)
         res = PADI.SSIM(x_est, true_polar_map)
-        # res = PADI.MSE_object(x_est, true_polar_map)
 
         Iu_disk_error = res[8]
         Ip_disk_error = res[9]
