@@ -16,22 +16,20 @@ git clone git@github.com:SpottedBush/PADI.git
 N.B.: Using SSH requires you to have a registered SSH key linked to your GitHub account.
 
 ## Usage
-
-First, you need to activate PADI environment using:
+Move to the PADI folder then, you need to activate PADI environment using:
 ```julia
-pkg> activate .julia/packages/PADI/XXXXX
+pkg> activate .
 pkg> precompile
 ```
-where XXXXX is the folder version.
 
-You can check the dependencies with:
-
+Then, you can check the dependencies with:
 ```julia
 pkg>status
 ```
 PADI can be applied using:
 
 ```julia
+using PADI
 x=apply_PADI(x0, A, d, μ)
 ```
 where:
