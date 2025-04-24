@@ -41,7 +41,6 @@ module PADI
         NonLinear_Method,
         apply_PADI,
         apply_edge_preserving_smoothing!,
-        MSE_object,
         SSIM
 
     import Base: +, -, *, /, ==, getindex, setindex!, read, write, convert
