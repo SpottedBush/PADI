@@ -13,7 +13,7 @@ git clone https://github.com/SpottedBush/PADI.jl
 ```sh
 git clone git@github.com:SpottedBush/PADI.git
 ```
-N.B.: GitHub might need you to be already logged in.
+N.B.: Using SSH requires you to have a registered SSH key linked to your GitHub account.
 
 ## Usage
 
