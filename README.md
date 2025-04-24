@@ -4,16 +4,16 @@
 
 ## Installation
 
-In the package manager:
 - Using HTTPS
-```julia
-pkg> add https://github.com/SpottedBush/PADI.jl
+```sh
+git clone https://github.com/SpottedBush/PADI.jl
 ```
 
 - Using SSH:
-```julia
-pkg> add git@github.com:SpottedBush/PADI.git
+```sh
+git clone git@github.com:SpottedBush/PADI.git
 ```
+N.B.: GitHub might need you to be already logged in.
 
 ## Usage
 
