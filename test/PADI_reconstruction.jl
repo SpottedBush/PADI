@@ -34,7 +34,6 @@ psf_center=readdlm("data_for_demo/PSF_centers_Airy.txt");
 
 PADI.load_parameters((DSIZE, 2*DSIZE, NTOT), Nframe, Nrot, Nangle, Center, (psf_center[1:2], psf_center[3:4]), Epsilon, derotang=DerotAng)
 
-# mse_list = Vector{Float64}()
 for k in contrast_list
     println("------Contrast parameter: ", k, "------")
     true_polar_map = PADI.read_and_fill_polar_map(parameter_type, "test_results/contrast_10e$(k)/TRUE.fits")

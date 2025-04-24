@@ -27,52 +27,6 @@
 #
 #------------------------------------------------
 
-
-function MSE_data(x_est::Array{T,N}, x_true::Array{T,N}, d::Array{data_table,1}) where {T <: AbstractFloat,N}
-    MSE=0.0;
-    n=0;
-    for data in d
-        res = MSE_data(x_est, x_true, data)
-        MSE +=res[1];
-        n += res[2];
-    end
-    return MSE,n
-end
-
-function MSE_data(x_est::Array{T,N}, x_true::Array{T,N}, d::data_table) where {T <: AbstractFloat,N}
-        minimum(d.weights) >=0 || error("invalid weights");    
-
-        res= d.H*(x_est - x_true);
-        MSE = vdot( res, d.weights.*res);
-        n= count(d.weights .>0);
-    return MSE,n
-end
-
-function absolute_error(x_est::PolarimetricMap, x_true::PolarimetricMap)
-    abs_error = zeros(length(fieldnames(PolarimetricMap)) - 1)
-    centers=size(x_est)[1:2]./2
-    mask=x_true.I_star .> 0
-    for ind in CartesianIndices(mask)
-        if (ind[1] - centers[1])^2 + (ind[2] - centers[2])^2 < 5^2
-            mask[ind]=0.
-        end           
-    end
-    for (i, attr) in enumerate(fieldnames(PolarimetricMap))
-        if i == 1 # Skipping field "parameter_type"
-            continue
-        end
-        if i == 11 # Calculating circular MSE for theta field
-            # abs_error[i - 1] = rad2deg(vnorm2(angle.(exp.(im*2*(x_est.θ - x_true.θ))).*get_MASK()/2)/n_pixels)
-            continue
-        end
-        x_est_field=getfield(x_est, attr) .* mask
-        x_true_field=getfield(x_true, attr) .* mask
-        abs_error[i - 1] = sum(abs.(x_est_field[x_true_field .!= 0] - x_true_field[x_true_field .!= 0]))
-        #abs_error[i - 1] /= sum(abs.(true[true .!= 0]))
-    end
-    return abs_error
-end
-
 function SSIM(x_est::PolarimetricMap, x_true::PolarimetricMap)
     ssim_values = zeros(length(fieldnames(PolarimetricMap)) - 1)
     for (i, attr) in enumerate(fieldnames(PolarimetricMap))
