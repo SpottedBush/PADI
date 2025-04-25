@@ -50,7 +50,7 @@ function calculate_ssim_for_prima(X::Vector{Float64})
     x_est = apply_PADI(X0, A, PADI.dataset, regularisation_parameters, maxeval=500, maxiter=1000, α=α, regul_type=regul_type)
     true_polar_map = PADI.read_and_fill_polar_map("mixed", "$(root_path)TRUE.fits")
     crop!(x_est)
-    write_polar_map(x_est, "test_results/prima/contrast_10e$(k)/$(regul_type)_regul/PADI$(λ_1)_$(λ_2).fits", overwrite=true)
+    write_polar_map(x_est, "test_results/prima/contrast_10e$(k)/$(regul_type)_regul/PADI_$(λ_1)_$(λ_2).fits", overwrite=true)
     curr_ssim = PADI.SSIM(x_est, true_polar_map)
     ssim_entry = [λ_1, λ_2, curr_ssim[8], curr_ssim[9], curr_ssim[10]]
     print("SSIM values: Iu_disk: ", curr_ssim[8], " | Iu_star ", curr_ssim[9])
