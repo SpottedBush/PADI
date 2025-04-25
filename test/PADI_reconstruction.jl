@@ -2,8 +2,6 @@ using PADI
 using DelimitedFiles
 using EasyFITS
 
-#include("test_separable_reconstruction.jl")
-
 # contrast_list = [i for i in range(-1.5, 0, step=0.5)]
 contrast_list = [-2.0]
 max_iter = 700

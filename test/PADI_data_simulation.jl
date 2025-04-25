@@ -7,8 +7,9 @@ if prod(readdir() .!= "test_results")
     mkdir("test_results")
 end
 
-# contrast_list = [i for i in range(-3, 0, step=0.5)]
 contrast_list = [-2.0]
+# contrast_list = [i for i in range(-3, 0, step=0.5)] # decoment this line to test multiple contrasts
+
 DSIZE=256;
 NTOT=64;
 Nframe=2;
@@ -41,9 +42,6 @@ ddit_fits = readfits("data_for_demo/ddit_simulated_data.fits");
 I_disk_original = view(ddit_fits, :, :, 1)
 
 for k in contrast_list
-    # if prod(readdir() .!= "test_results/contrast_10e$(k)")   
-    #     mkdir("test_results/contrast_10e$(k)")
-    # end
     Iu_star = copy(Iu_star_original)
     I_disk = copy(I_disk_original)
 
@@ -66,7 +64,7 @@ for k in contrast_list
 
     data, weight, S, S_convolved = PADI.ddit_data_simulator(GoodPixMap, A, X0, ro_noise=8.5);
 
-    writefits("test_results/contrast_10e$(k)/mask.fits", ["DATE" => (now(), "date of creation")], PADI.get_MASK(), overwrite=true)
+    writefits("test_results/contrast_10e$(k)/MASK.fits", ["D" => ("Ok", "")], PADI.get_MASK()', overwrite=true)
 
     writefits("test_results/contrast_10e$(k)/DATA.fits",
     ["DATE" => (now(), "date of creation")],
@@ -81,5 +79,4 @@ for k in contrast_list
 
     PADI.write_polar_map(S_convolved, "test_results/contrast_10e$(k)/TRUE_convolved.fits", overwrite=true)
     PADI.write_polar_map(S, "test_results/contrast_10e$(k)/TRUE.fits", overwrite=true)
-    writefits("test_results/contrast_10e$(k)/MASK.fits", ["D" => ("Ok", "")], PADI.get_MASK()', overwrite=true)
 end

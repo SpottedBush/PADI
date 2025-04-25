@@ -35,10 +35,6 @@ module PADI
         generate_model,
         data_generator,
         generate_parameters,
-        Double_Difference,
-        Double_Ratio,
-        Linear_Method,
-        NonLinear_Method,
         apply_PADI,
         apply_edge_preserving_smoothing!,
         SSIM
@@ -59,17 +55,16 @@ module PADI
     using FITSIO
     using EasyFITS
     using DelimitedFiles
-    #using TiPi
     using Random
     using ImageQualityIndexes
     import ImageQualityIndexes: assess_ssim
 
 
-    include("polarimetric_parameters.jl")
+    include("datasimul_tools.jl")
     include("grad_tools.jl")
     include("loaders.jl")
-    include("sure_tools.jl")
     include("padi_methods.jl")
-    include("datasimul_tools.jl")
+    include("polarimetric_parameters.jl")
+    include("sure_tools.jl")
     include("utils.jl")
 end
