@@ -45,6 +45,7 @@ where:
 
 Further usage can be found in the test folder where reconstruction scripts examples are given.
 Each required data for the scripts contained in the test folder can be accessed here : https://drive.google.com/drive/folders/1RcNd5Qh6XD2Trd07VGPWqlphMU699PFi?usp=drive_link
+Those folders must be extracted in root folder
 
 ## Architecture
 <pre>
@@ -66,10 +67,66 @@ PADI/
 │   ├── testsuites/             # Test suites for Grad tools and polarimetric parameters methods
 │   ├── PADI_data_simulation.jl # Requires data_for_demo fits file (PSF fits/txt, Iu_star.fits, ddit_simulated_data.fits) produces MASK.fits, DATA.fits, WEIGHT.fits, TRUE_convolved.fits and TRUE.fits for the corresponding contrast_list
 │   ├── PADI_reconstruction.jl  # Requires what PADI_data_simulation.jl produces and do a single PADI reconstruction (depending on its contrast and regul_type)
-│   └── SSIM_diff_from_file.jl  # SSIM comparison on each layer of the input fits files (Ip with Ip etc...).
+│   └── SSIM_diff_from_file.jl  # SSIM comparison on each layer of the input fits files (Ip with Ip etc...)
 │
 ├── LICENCE.md
 ├── Manifest.toml               # Julia package dependency lock file
 ├── Project.toml                # Julia project dependencies
-└── README.md                   # PADI documentation
+├── README.md                   # PADI documentation
+│
+######## GoogleDrive Part, once downloaded, extract it at the root folder ########
+│
+├── data_for_demo/              # Contains data used by PADI_data_simulation.jl, needs to be downloaded on the GoogleDrive
+│   ├── ddit_simulated_data.fits
+│   ├── Iu_star.fits
+│   ├── Parameters.txt
+│   ├── pds70_angles.txt
+│   ├── PSF_centers_Airy.txt
+│   └── PSF_parametered_Airy.fits
+│  
+├── pds70_data/                 # Contains data to reproduce the pds70 figures
+│   ├── DATA_processed_coro.fits
+│   ├── Ditering.txt
+│   ├── generate_double_diff.jl
+│   ├── instruments_values_with_crosstalk.txt
+│   ├── pds70_angles.txt
+│   ├── PSF_centers_Airy.txt
+│   ├── PSF_parametered_Airy.fits
+│   ├── Results_Separable_DoubleDifference.fits
+│   ├── RHAPSODIE.fits
+│   ├── WEIGHT_processed_coro.fits
+│   ├── Parameters.txt
+│   ├── reconstruction_scripts/
+│   │   ├── generate_pds70_reconstruction.jl
+│   │   ├── rd_pds70_reconstruction.jl
+│   │   ├── rj_pds70_reconstruction.jl
+│   │   └── rs_pds70_reconstruction.jl
+│   └── results/
+│       ├── PADI_pds70_mixed_disjoint_{λ_1}_{λ_2}.fits
+│       ├── PADI_pds70_mixed_joint_{λ}_{α}.fits
+│       └── PADI_pds70_mixed_struct_{λ_1}_{λ_2}_{α}.fits
+│  
+└── test_results/               # Folder that contains every results produced by the scripts in the "test" folder
+    ├── contrast_10e-{value}/   # Results that are produced with 10e-{value} contrast
+    │   ├── DATA.fits           # Base DATA with 10e-{value} contrast
+    │   ├── MASK.fits           # Pixels MASK
+    │   ├── WEIGHT.fits         # Pixels WEIGHT
+    │   ├── TRUE.fits           # Ground truth we aim for when reconstructing using PADI
+    │   ├── TRUE_convolved.fits # Same as TRUE but convolved
+    │   ├── RHAPSODIE.fits      # RHAPSODIE reconstruction for this contrast
+    │   ├── Results_Separable_DoubleDifference.fits # DoubleDifference reconstruction for this contrast
+    │   └── PADI_method_results/ # PADI reconstructions for this contrast
+    │       └── max_iter_{max_iter}/ # Contains results of the PADI methods for max_iter iterations
+    │
+    └── prima/                  # Results produced by prima scripts
+        └── contrast_10e-{value}/
+            ├── disjoint_regul/
+            │   ├── PADI_{λ_1}_{λ_2}.fits
+            │   └── ssim.csv    # Contains SSIM comparison between the different hyperparam couples for the different layers (Iu_disk, Ip_disk, θ.)
+            ├── joint_regul/
+            │   ├── PADI_{λ}_{α}.fits
+            │   └── ssim.csv
+            └── struct_regul/
+                ├── PADI_{λ_1}_{λ_2}_{α}.fits
+                └── ssim.csv
 <pre>
