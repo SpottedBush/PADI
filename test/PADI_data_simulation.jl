@@ -2,13 +2,16 @@ using PADI
 using DelimitedFiles
 using EasyFITS
 using Dates
-
-if prod(readdir() .!= "test_results")     
-    mkdir("test_results")
-end
+import Base.Filesystem: mkpath
 
 contrast_list = [-2.0]
 # contrast_list = [i for i in range(-3, 0, step=0.5)] # decoment this line to test multiple contrasts
+
+    # Make sure the folder exists
+mkpath("data_for_demo/")
+for k in contrast_list
+    mkpath("test_results/contrast_10e$(k)/")
+end
 
 DSIZE=256;
 NTOT=64;

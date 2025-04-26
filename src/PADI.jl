@@ -60,11 +60,11 @@ module PADI
     import ImageQualityIndexes: assess_ssim
 
 
+    include("polarimetric_parameters.jl")
     include("datasimul_tools.jl")
     include("grad_tools.jl")
     include("loaders.jl")
     include("padi_methods.jl")
-    include("polarimetric_parameters.jl")
     include("sure_tools.jl")
     include("utils.jl")
 end

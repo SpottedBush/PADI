@@ -1,11 +1,15 @@
 using PADI
 using EasyFITS
 using DelimitedFiles
+import Base.Filesystem: mkpath
 
 parameter_type = "mixed"
 prima_path = "test_results/prima/contrast_10e-2.0/" * "joint_regul/"
 base_path = "test_results/contrast_10e-2.0/"
 true_polar_map = PADI.read_and_fill_polar_map(parameter_type, base_path * "TRUE.fits")
+
+# Make sure the folder exists
+mkpath(prima_path)
 
 error_list = Vector{Vector{Float64}}()
 

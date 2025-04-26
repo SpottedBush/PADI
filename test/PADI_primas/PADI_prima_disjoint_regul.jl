@@ -2,6 +2,8 @@ using PADI
 using PRIMA
 using DelimitedFiles
 using EasyFITS
+import Base.Filesystem: mkpath
+
 
 par=readdlm("data_for_demo/Parameters.txt")
 DSIZE=Int64(par[1]);
@@ -18,7 +20,7 @@ for iter=1:NTOT
     ind=div(iter-1, NTOT/4)+1
     push!(Epsilon,([0. ,0. ],par[end-1:end]));
 end
-		
+
 psf_center=readdlm("data_for_demo/PSF_centers_Airy.txt");
 PADI.load_parameters((DSIZE, 2*DSIZE, NTOT), Nframe, Nrot, Nangle, Center, (psf_center[1:2], psf_center[3:4]), Epsilon, derotang=DerotAng)
 
@@ -34,9 +36,7 @@ println("Starting contrast: 10e$(k)")
 ssim_list = Vector{Vector{Any}}()
 root_path = "test_results/contrast_10e$(k)/"
 dir_path = "test_results/prima/contrast_10e$(k)"
-if !isdir(dir_path)
-    mkdir(dir_path)
-end
+
 PADI.load_data("$(root_path)DATA.fits", "$(root_path)WEIGHT.fits")
 
 function calculate_ssim_for_prima(X::Vector{Float64})
@@ -50,6 +50,7 @@ function calculate_ssim_for_prima(X::Vector{Float64})
     x_est = apply_PADI(X0, A, PADI.dataset, regularisation_parameters, maxeval=500, maxiter=1000, α=α, regul_type=regul_type)
     true_polar_map = PADI.read_and_fill_polar_map("mixed", "$(root_path)TRUE.fits")
     crop!(x_est)
+    mkpath("test_results/prima/contrast_10e$(k)/$(regul_type)_regul/")
     write_polar_map(x_est, "test_results/prima/contrast_10e$(k)/$(regul_type)_regul/PADI_$(λ_1)_$(λ_2).fits", overwrite=true)
     curr_ssim = PADI.SSIM(x_est, true_polar_map)
     ssim_entry = [λ_1, λ_2, curr_ssim[8], curr_ssim[9], curr_ssim[10]]

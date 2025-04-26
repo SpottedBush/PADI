@@ -1,6 +1,7 @@
 using PADI
 using DelimitedFiles
 using EasyFITS
+import Base.Filesystem: mkpath
 
 # contrast_list = [i for i in range(-1.5, 0, step=0.5)]
 contrast_list = [-2.0]
@@ -8,6 +9,12 @@ max_iter = 700
 # α=10^-5
 λ = -2.998282567943823
 α= 5.209978160792237
+
+
+# Make sure the folder exists
+for k in contrast_list
+    mkpath("test_results/contrast_10e$(k)/PADI_method_results/max_iter_$(max_iter)/")
+end
 
 par=readdlm("data_for_demo/Parameters.txt")
 DSIZE=Int64(par[1]);
