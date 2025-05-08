@@ -48,7 +48,7 @@ for k in contrast_list
     PADI.load_data("test_results/contrast_10e$(k)/DATA.fits", "test_results/contrast_10e$(k)/WEIGHT.fits")
 
     PSF = readfits("data_for_demo/PSF_parametered_Airy.fits");
-    A = set_fft_op(PSF[1:end÷2,:]'[:,:], psf_center[1:2]);
+    local A = set_fft_op(PSF[1:end÷2,:]'[:,:], psf_center[1:2]);
     X0 = diff_polar_map;
     regularisation_parameters = 10 .^[-8, -1., λ, -0.66, -3, -0.66] #(in log10) star, disk | Iu_star, Iu_star, Iu_disk, Iu_disk, Ip_disk, Ip_disk
 

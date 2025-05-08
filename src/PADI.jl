@@ -37,12 +37,13 @@ module PADI
         generate_parameters,
         apply_PADI,
         apply_edge_preserving_smoothing!,
-        SSIM
+        SSIM,
+        Indices
 
     import Base: +, -, *, /, ==, getindex, setindex!, read, write, convert
 
     using OptimPackNextGen
-    import OptimPackNextGen: BraDi #va devenir BraDi avec un D majuscule
+    import OptimPackNextGen: BraDi
     using SpecialFunctions
     using TwoDimensional
     using FFTW
