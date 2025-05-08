@@ -1,6 +1,11 @@
 # PADI.jl
 **PADI** (Reconstruction of High-contrAst Polarized SOurces and Deconvolution for cIrcumstellar Environments)
 
+## Requirements
+- [Julia](https://julialang.org/install/) version 1.11.5 or above
+- Other Julia dependencies can be found under the Manifest.toml or Project.toml files
+  
+Please note that except julia, every requirements will be installed when using the "pkg> precompile" command (Usage section).
 
 ## Installation
 
@@ -14,8 +19,6 @@ git clone https://github.com/SpottedBush/PADI.jl
 git clone git@github.com:SpottedBush/PADI.git
 ```
 N.B.: Using SSH requires you to have a registered SSH key linked to your GitHub account.
-
-## Usage
 Move to the PADI folder then, you need to activate PADI environment using:
 ```julia
 pkg> activate .
@@ -26,6 +29,8 @@ Then, you can check the dependencies with:
 ```julia
 pkg>status
 ```
+
+## Usage
 PADI can be applied using:
 
 ```julia
@@ -44,7 +49,7 @@ where:
 
 
 Further usage can be found in the test folder where reconstruction scripts examples are given.
-Each required data for the scripts contained in the test folder can be accessed here : https://drive.google.com/drive/folders/1RcNd5Qh6XD2Trd07VGPWqlphMU699PFi?usp=drive_link
+Each required data for the scripts contained in the test folder can be accessed [here](https://drive.google.com/drive/folders/1RcNd5Qh6XD2Trd07VGPWqlphMU699PFi?usp=drive_link)
 Those folders must be extracted in root folder
 
 ## Architecture
@@ -65,8 +70,9 @@ PADI/
 ├── test/                       # Unit tests and simulations
 │   ├── PADI_primas/            # PRIMA scripts to find the optimal hyperparameters couple considering a certain ground truth 
 │   ├── testsuites/             # Test suites for Grad tools and polarimetric parameters methods
+│   ├── generate_double_diff.jl # Requires what PADI_data_simulation.jl produces. Outputs the double difference for the contrast k 
 │   ├── PADI_data_simulation.jl # Requires data_for_demo fits file (PSF fits/txt, Iu_star.fits, ddit_simulated_data.fits) produces MASK.fits, DATA.fits, WEIGHT.fits, TRUE_convolved.fits and TRUE.fits for the corresponding contrast_list
-│   ├── PADI_reconstruction.jl  # Requires what PADI_data_simulation.jl produces and do a single PADI reconstruction (depending on its contrast and regul_type)
+│   ├── PADI_reconstruction.jl  # Requires what PADI_data_simulation.jl and generate_double_diff.jl produces and do a single PADI reconstruction (depending on its contrast and regul_type)
 │   └── SSIM_diff_from_file.jl  # SSIM comparison on each layer of the input fits files (Ip with Ip etc...)
 │
 ├── LICENCE.md
