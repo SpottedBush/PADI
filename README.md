@@ -3,7 +3,11 @@
 
 ## Requirements
 - [Julia](https://julialang.org/install/) version 1.11.5 or above
-- Python might be required if you want to reproduce the paper's figures. Otherwise not.
+- Python might be required if you want to reproduce the paper's figures. Otherwise not. The python requirements are :
+  - MatPlotLib
+  - Numpy
+  - Skimage
+  - astropy
 - Other Julia dependencies can be found under the Manifest.toml or Project.toml files
   
 Please note that except julia, every requirements will be installed when using the "pkg> precompile" command (Usage section).
