@@ -3,6 +3,11 @@
 
 ## Requirements
 - [Julia](https://julialang.org/install/) version 1.11.5 or above
+- Python might be required if you want to reproduce the paper's figures. Otherwise not. The python requirements are :
+  - MatPlotLib
+  - Numpy
+  - Skimage
+  - astropy
 - Other Julia dependencies can be found under the Manifest.toml or Project.toml files
   
 Please note that except julia, every requirements will be installed when using the "pkg> precompile" command (Usage section).
@@ -11,7 +16,7 @@ Please note that except julia, every requirements will be installed when using t
 
 - Using HTTPS
 ```sh
-git clone https://github.com/SpottedBush/PADI.jl
+git clone https://github.com/SpottedBush/PADI.git
 ```
 
 - Using SSH:
@@ -47,10 +52,23 @@ where:
 
 -`μ` a vector of regularization hyperparameters.
 
+## Figures Reproduction
 
-Further usage can be found in the test folder where reconstruction scripts examples are given.
-Each required data for the scripts contained in the test folder can be accessed [here](https://drive.google.com/drive/folders/1RcNd5Qh6XD2Trd07VGPWqlphMU699PFi?usp=drive_link)
-Those folders must be extracted in root folder
+In order to reproduce Padi paper's figure 2, you'll need to execute the files in this exact order:
+- test/PADI_data_simulation.jl
+- test/generate_double_diff.jl
+- test/PADI_reconstruction.jl
+- test/PADI_primas/PADI_{regul_type}.jl # The three regularisations presented in the paper
+
+For figure 3 :
+- pds70_data/generate_double_diff.jl
+- pds70_data/generate_pds70_reconstruction.jl
+- pds70_data/{regul_type}_pds70_reconstruction.jl # The three regularisations presented in the paper
+
+Then, for both figures, head to `metrics.ipynb` and execute the cell that contains the function `plot_images_comparison` then execute this function with the right paths.
+
+Each required data for the scripts contained in the test folder can be accessed [here](https://drive.google.com/drive/folders/1RcNd5Qh6XD2Trd07VGPWqlphMU699PFi?usp=drive_link).
+Those folders must be extracted in root folder.
 
 ## Architecture
 <pre>
