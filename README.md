@@ -131,7 +131,7 @@ PADI/
 │       └── PADI_pds70_mixed_struct_{λ_1}_{λ_2}_{α}.fits
 │  
 └── test_results/               # Folder that contains every results produced by the scripts in the "test" folder
-    ├── contrast_10e-{value}/   # Results that are produced with 10e-{value} contrast
+    ├── contrast_10e-{value}/   # Results that are produced with 10e-{value} contrast. Note that "value" can be found and changed as the variable name "contrast_list"
     │   ├── DATA.fits           # Base DATA with 10e-{value} contrast
     │   ├── MASK.fits           # Pixels MASK
     │   ├── WEIGHT.fits         # Pixels WEIGHT
@@ -143,7 +143,7 @@ PADI/
     │       └── max_iter_{max_iter}/ # Contains results of the PADI methods for max_iter iterations
     │
     └── prima/                  # Results produced by prima scripts
-        └── contrast_10e-{value}/
+        └── contrast_10e-{value}/ # Note that "value" can be found and changed as the variable name "contrast_list"
             ├── disjoint_regul/
             │   ├── PADI_{λ_1}_{λ_2}.fits
             │   └── ssim.csv    # Contains SSIM comparison between the different hyperparam couples for the different layers (Iu_disk, Ip_disk, θ.)
