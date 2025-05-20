@@ -32,7 +32,7 @@ pkg> precompile
 
 Then, you can check the dependencies with:
 ```julia
-pkg>status
+pkg> status
 ```
 
 ## Usage
